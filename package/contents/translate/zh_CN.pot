@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../config/config.qml
+msgid "General"
+msgstr "通用"
+
 #: ../ui/main.qml
 msgid "Work hours record"
 msgstr "工作时长记录"
