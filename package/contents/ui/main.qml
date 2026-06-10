@@ -58,7 +58,6 @@ PlasmoidItem {
 
             PlasmaComponents.Label {
                 id: percentLabel
-                text: "05:32|30%"
             }
 
             Timer {
@@ -69,7 +68,7 @@ PlasmoidItem {
                 triggeredOnStart: true
 
                 onTriggered: {
-                    clock.text = Qt.formatTime(new Date(), "hh:mm")
+                    clock.text = Qt.formatTime(new Date(), "hh:mm:ss")
 
                     bar.value = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
                     percentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${bar.value}%`
