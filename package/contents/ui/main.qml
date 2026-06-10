@@ -71,8 +71,8 @@ PlasmoidItem {
                 onTriggered: {
                     clock.text = Qt.formatTime(new Date(), "hh:mm")
 
-                    bar.value = Utils.percent(Utils.numberToTime(9, 0), Utils.numberToTime(19, 0))
-                    percentLabel.text = `${Utils.diffTime(Utils.numberToTime(19, 0))}|${bar.value}%`
+                    bar.value = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
+                    percentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${bar.value}%`
                 }
             }
 
