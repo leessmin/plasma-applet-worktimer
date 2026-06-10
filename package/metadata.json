@@ -9,7 +9,7 @@
         "Category": "Life",
         "Description": "A work time recording tool",
         "Description[zh_CN]": "一个工作时间记录工具",
-        "Icon": "battery",
+        "Icon": "face-uncertain",
         "Id": "com.leessmin.worktimer",
         "Name": "Work Timer",
         "Name[zh_CN]": "工作时间记录器",
