@@ -5,15 +5,18 @@ import org.kde.plasma.components as PlasmaComponents
 import "../code/utils.js" as Utils
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
 
 PlasmoidItem {
     id: root
-    implicitWidth: 500
-    implicitHeight: 100
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
 
     property var cfg: Plasmoid.configuration
+    readonly property var isPlanar: Plasmoid.formFactor == PlasmaCore.Types.Planar
 
     ColumnLayout {
+        visible: isPlanar
         anchors.fill: parent
         spacing: 0
         Layout.margins: 2
@@ -74,25 +77,34 @@ PlasmoidItem {
             }
 
             PlasmaComponents.Label {
-                id: percentLabel
+                id: planarPercentLabel
             }
+        }
+    }
 
-            Timer {
-                interval: 1000
-                running: true
-                repeat: true
+    PlasmaComponents.Label {
+        id: percentLabel
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        visible: !isPlanar
 
-                triggeredOnStart: true
+        horizontalAlignment: Text.AlignHCenter
+    }
 
-                onTriggered: {
-                    clock.text = Qt.formatTime(new Date(), "hh:mm:ss")
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
 
-                    const percent = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
-                    bar.value = Number((percent / 100).toFixed(3)) // 进度条百分比
-                    percentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%)` // 右侧百分比信息
-                }
-            }
+        triggeredOnStart: true
 
+        onTriggered: {
+            clock.text = Qt.formatTime(new Date(), "hh:mm:ss")
+
+            const percent = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
+            bar.value = Number((percent / 100).toFixed(3)) // 进度条百分比
+            planarPercentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%)` // 百分比信息
+            percentLabel.text = `${percent}%`
         }
     }
 }
