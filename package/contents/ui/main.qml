@@ -103,7 +103,7 @@ PlasmoidItem {
 
             const percent = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
             bar.value = Number((percent / 100).toFixed(3)) // 进度条百分比
-            planarPercentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%)` // 百分比信息
+            planarPercentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%` // 百分比信息
             percentLabel.text = `${percent}%`
         }
     }
