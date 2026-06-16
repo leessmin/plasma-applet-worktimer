@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.components as PlasmaComponents
 import "../code/utils.js" as Utils
+import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
 PlasmoidItem {
     id: root
@@ -26,14 +28,29 @@ PlasmoidItem {
             }
         }
 
-        PlasmaComponents.ProgressBar {
+        QQC2.ProgressBar {
             id: bar
-            from: 0
-            to: 100
             value: 0
-
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop   // 关键
+            implicitHeight: 8
+
+            background: Rectangle {
+                anchors.fill: parent
+                color: Kirigami.Theme.backgroundColor
+                radius: height / 2
+            }
+
+            contentItem: Item {
+                anchors.fill: parent
+
+                Rectangle {
+                    height: parent.height
+                    width: bar.visualPosition * parent.width
+                    color: Kirigami.Theme.neutralTextColor
+                    radius: height / 2
+                }
+            }
         }
 
         RowLayout {
@@ -70,8 +87,9 @@ PlasmoidItem {
                 onTriggered: {
                     clock.text = Qt.formatTime(new Date(), "hh:mm:ss")
 
-                    bar.value = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
-                    percentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${bar.value}%`
+                    const percent = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
+                    bar.value = Number((percent / 100).toFixed(3)) // 进度条百分比
+                    percentLabel.text = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%)` // 右侧百分比信息
                 }
             }
 
