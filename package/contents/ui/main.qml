@@ -33,7 +33,7 @@ PlasmoidItem {
             value: 0
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop   // 关键
-            implicitHeight: 8
+            implicitHeight: Kirigami.Units.gridUnit * 0.5
 
             background: Rectangle {
                 anchors.fill: parent
