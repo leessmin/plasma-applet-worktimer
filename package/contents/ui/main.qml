@@ -88,16 +88,22 @@ PlasmoidItem {
         }
     }
 
-    compactRepresentation: Item {
+    compactRepresentation: QQC2.Control {
         anchors.fill: parent
 
         PlasmaComponents.Label {
             anchors.fill: parent
             text: root.value.percentLabel
-            Layout.fillWidth: true
-            Layout.fillHeight: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                root.expanded = !root.expanded
+            }
         }
     }
 
@@ -117,7 +123,6 @@ PlasmoidItem {
             }
 
             v.clock = Qt.formatTime(new Date(), "hh:mm:ss")
-
             const percent = Utils.percent(Utils.numberToTime(root.cfg.startTimeHour, root.cfg.startTimeMinute), Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))
             v.bar = Number((percent / 100).toFixed(3)) // 进度条百分比
             v.planarPercentLabel = `${Utils.diffTime(Utils.numberToTime(root.cfg.endTimeHour, root.cfg.endTimeMinute))}|${percent}%` // 百分比信息
