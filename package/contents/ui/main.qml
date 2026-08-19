@@ -16,6 +16,7 @@ PlasmoidItem {
     readonly property var isPlanar: Plasmoid.formFactor == PlasmaCore.Types.Planar
 
     ColumnLayout {
+        id: layout
         visible: isPlanar
         anchors.fill: parent
         spacing: 0
