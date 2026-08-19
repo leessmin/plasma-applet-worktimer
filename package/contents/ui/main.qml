@@ -55,7 +55,7 @@ PlasmoidItem {
                     Rectangle {
                         height: parent.height
                         width: bar.visualPosition * parent.width
-                        color: Kirigami.Theme.neutralTextColor
+                        color: Kirigami.Theme.highlightColor
                         radius: height / 2
                     }
                 }
